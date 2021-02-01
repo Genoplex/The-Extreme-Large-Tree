@@ -57,7 +57,7 @@ function getPointGen() {
 	}
 	if(player.Elements.unlocked)
 	{
-		gain = gain.times(tmp["Elements"].effect)
+		gain = gain.times(tmp["Elements"].effect.main_multiple)
 	}
 	if(hasUpgrade("Elements",11))
 	{

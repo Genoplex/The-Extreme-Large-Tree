@@ -22,7 +22,7 @@ addLayer("Elements",
         "blank",
         ["display-text",function(){return 'You have ' + format(player.Particles.points) + ' Particles'}],
         "blank",
-        ["display-text",function(){return 'You have ' + format(player.Elements.points) + ' Atoms and they boost production by ' + format(tmp["Elements"].effect) + "x" }],
+        ["display-text",function(){return 'You have ' + format(player.Elements.points) + ' Atoms and they boost production by ' + format(tmp["Elements"].effect.atom_multiple) + "x" }],
         "blank",
         "buyables",
         "blank",
@@ -59,16 +59,18 @@ addLayer("Elements",
     
     effect()
     {
-        multiple = player.Elements.points
+        atom_multiple = player.Elements.points
         if (!(hasUpgrade("Elements",41)))
         {
-            multiple = multiple.pow(0.75).add(1)
+            atom_multiple = atom_multiple.pow(0.75).add(1)
         }
         if (hasUpgrade("Elements",41))
         {
-            multiple = multiple.pow(0.8).add(1)
+            atom_multiple = atom_multiple.pow(0.95).add(1)
         }
-        return multiple
+        buyable11_multiple = new Decimal(1.1).pow(getBuyableAmount("Elements",11))
+        main_multiple = atom_multiple * buyable11_multiple
+        return {atom_multiple, buyable11_multiple, main_multiple}
     },
         
     baseAmount()
@@ -96,7 +98,7 @@ addLayer("Elements",
     {
         0:
         {
-            requirementDescription : "Elements Layer Unlocked",
+            requirementDescription : "EM1 - Elements Layer Unlocked",
             effectDescription      : "Atoms begin to boost production",
             done                   :  function()
             {
@@ -105,7 +107,7 @@ addLayer("Elements",
         },
         1:
         {
-            requirementDescription : "E1-1A, E1-1B or E1-1C Bought",
+            requirementDescription : "EM2 - E1-1A, E1-1B or E1-1C Bought",
             effectDescription      : "Generator MK3 save the mechanical components. Keep P1-1, P1-2 and P1-3 on reset.",
             done                   :  function()
             {
@@ -114,7 +116,7 @@ addLayer("Elements",
         },
         2:
         {
-            requirementDescription : "100 Atoms in Total",
+            requirementDescription : "EM3 - 100 Atoms in Total",
             effectDescription      : "Atoms begin to differentiate into elements. Unlock a new Buyable",
             done                   :  function()
             {
@@ -123,11 +125,15 @@ addLayer("Elements",
         },
         3:
         {
-            requirementDescription : "1,000,000 Atoms in Total",
+            requirementDescription : "EM4 - 1 EB1 bought",
             effectDescription      : "Atoms begin to react with each other. Unlock a new layer",
             done                   :  function()
             {
-                return player[this.layer].best.gte(10000)
+                if(getBuyableAmount("Elements",11) > 0)
+                {
+                    return true
+                }
+                return false
             }
         }
     },
@@ -138,10 +144,43 @@ addLayer("Elements",
         cols:1,
         11:
         {
-            title : "Number of types of elements",
+            title : "EB1 - Quantity of natural elements",
+            display()
+            {
+                let description = "\n<b><h3>Natural elements start to form\nEvery element will boost production for 1.1x</h3></b>\n"
+                let start       = "\n<b><h3>Amount: " + getBuyableAmount("Elements",11) + " Types</h3></b>"
+                let effect      = "\n<b><h3>Effect: " + format(this.effect()) + "</h3></b>"
+                let cost        = "\n<b><h3>Cost: "   + format(this.cost()) + " Atoms</h3></b>"
+                return description + start + effect + cost
+            },
+            cost()
+            {
+                if(getBuyableAmount("Elements",11) < 95)
+                {
+                    x = getBuyableAmount("Elements",11).add(1).pow(1.5).times(500)
+                }
+                if(getBuyableAmount("Elements",11) > 95)
+                {
+                    x= new Decimal(Infinity)
+                }
+                return x
+            },
+            effect()
+            {
+                return new Decimal(1.1).pow(getBuyableAmount("Elements",11))  
+            },
             unlocked : function()
             {
                 return hasMilestone("Elements",2)
+            },
+            canAfford()
+            {
+                return player[this.layer].points.gte(this.cost())
+            },
+            buy()
+            {
+                player[this.layer].points = player[this.layer].points.sub(this.cost())
+                setBuyableAmount(this.layer,11,getBuyableAmount(this.layer,11).add(1))
             }
         }
     },
@@ -153,7 +192,7 @@ addLayer("Elements",
         11:
         {
             title       : "E1-1A Generator MK3-Speed",
-            description : "Time resist. Locks B and C",
+            description : "Time resistance. Locks B and C",
             cost()
             {
                 if((hasUpgrade("Elements",12) && !(hasUpgrade("Elements",51))) || (hasUpgrade("Elements",13) && !(hasUpgrade("Elements",51)) || (hasUpgrade("Elements",12) && hasUpgrade("Elements",13) && hasUpgrade("Elements",51))))
@@ -198,7 +237,7 @@ addLayer("Elements",
         12:
         {
             title       : "E1-1B Generator MK3-Normal",
-            description : "Stable production. Locks A and C",
+            description : "Stable working. Locks A and C",
             cost()
             {
                 if((hasUpgrade("Elements",11) && !(hasUpgrade("Elements",51))) || (hasUpgrade("Elements",13) && !(hasUpgrade("Elements",51)) || (hasUpgrade("Elements",11) && hasUpgrade("Elements",13) && hasUpgrade("Elements",51))))
@@ -211,18 +250,18 @@ addLayer("Elements",
             {
                 if (hasUpgrade("Elements",22))
                 {
-                    return 62.5
+                    return 50
                 }
                 if (!(hasUpgrade("Elements",22)))
                 {
-                    return 50
+                    return 33.33
                 }
             }
         },
         13:
         {
             title       : "E1-1C Generator MK3-Time",
-            description : "Time boosts. Locks A and B",
+            description : "Time conductance. Locks A and B",
             cost()
             {
                 if((hasUpgrade("Elements",11) && !(hasUpgrade("Elements",51))) || (hasUpgrade("Elements",12) && !(hasUpgrade("Elements",51)) || (hasUpgrade("Elements",11) && hasUpgrade("Elements",12) && hasUpgrade("Elements",51))))
@@ -244,7 +283,7 @@ addLayer("Elements",
                 }
                 if (!hasUpgrade("Elements",33))
                 {
-                    increase = time * 2
+                    increase = time * 0.1
                 }
                 if (hasUpgrade("Elements",33))
                 {
@@ -253,7 +292,7 @@ addLayer("Elements",
                     {
                         increase_multiple = 1
                     }
-                    increase = time * 2 * increase_multiple
+                    increase = time * 0.1 * increase_multiple
                 }
                 boost = increase + begin
                 if(boost < 0.5)
@@ -376,7 +415,7 @@ addLayer("Elements",
         {
             title       : "E4-3 Component Protection",
             description : "Keep every P Upgrades on reset",
-            cost        :  new Decimal(10000),
+            cost        :  new Decimal(5000),
             unlocked    :  function()
             {
                 return (hasUpgrade("Elements",42))

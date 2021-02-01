@@ -10,5 +10,5 @@ A modified version of The Prestige Tree which is still under constuction.
 This is the tutorial of modding.
 [Look here for a tutorial on getting started with modding with TMT](docs/getting-started.md)
 
-Further tutorial
+Further tutorial.
 [documentation](docs/!general-info.md)

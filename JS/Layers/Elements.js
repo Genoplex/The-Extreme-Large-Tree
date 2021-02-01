@@ -408,7 +408,7 @@ addLayer("Elements",
             cost        :  new Decimal(1000),
             unlocked    :  function()
             {
-                return (hasUpgrade("Elements",41) && hasUpgrade("Particles",33))
+                return ((hasUpgrade("Elements",41) && hasUpgrade("Particles",33)) || hasUpgrade("Elements",42))
             }
         },
         43:

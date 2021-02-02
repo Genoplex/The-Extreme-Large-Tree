@@ -33,9 +33,19 @@ addLayer("Elements",
     ],
 
 
-    doReset()
+    doReset(resettingLayer)
     {
         player.resetTime = 0
+        if (resettingLayer == "Matters")
+        {
+            upgradeKeep = player.Elements.upgrades
+            buyableKeep = player.Elements.buyables
+            milestoneKeep = player.Elements.milestones
+            layerDataReset("Elements")
+            player.Elements.upgrades = upgradeKeep
+            player.Elements.buyables = buyableKeep
+            player.Elements.milestones = milestoneKeep
+        }
     },
 
     canBuyMax    : function()

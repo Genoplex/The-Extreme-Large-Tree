@@ -65,13 +65,13 @@ addLayer("Particles",
     {
         if (Layer && layers[Layer].row > layers[this.layer].row)
         {
-            var listKeep = [];
-            var upgradeKeep = [];
-            if (Layer === "Elements" && hasMilestone("Elements",1))
+            var listKeep = []
+            var upgradeKeep = []
+            if (hasMilestone("Elements",1))
             {
                 upgradeKeep.push(11,21,31)
             }
-            if (Layer === "Elements" && hasUpgrade("Elements",43))
+            if (hasUpgrade("Elements",43))
             {
                 upgradeKeep.push(11,12,13,21,22,23,31,32,33)
             }

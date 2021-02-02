@@ -293,7 +293,7 @@ addLayer("Elements",
                 }
                 if (!hasUpgrade("Elements",33))
                 {
-                    increase = time * 0.1
+                    increase = time * 0.05
                 }
                 if (hasUpgrade("Elements",33))
                 {
@@ -302,7 +302,7 @@ addLayer("Elements",
                     {
                         increase_multiple = 1
                     }
-                    increase = time * 0.1 * increase_multiple
+                    increase = time * 0.05 * increase_multiple
                 }
                 boost = increase + begin
                 if(boost < 0.5)

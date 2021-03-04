@@ -1,6 +1,6 @@
 # The Modding Tree changelog:
 
-### v0.0.2.3 - 03/04/21 (This updata is just to tell that I didn't give up this mod. It wasn't uploaded)
+### v0.0.2.3 - 03/04/21 - (Not uploaded. This update is just to tell that I didn't give up this mod)
 - Defined 14 Layers
 - Build Layer-Lifes, Layer-GreatFilters, Layer-Elemixs, Layer-ExoticElements
 - Improvements and Ajustments

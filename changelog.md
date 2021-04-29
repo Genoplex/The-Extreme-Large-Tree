@@ -1,6 +1,12 @@
 # The Modding Tree changelog:
 
-### v0.0.2.3.0 - 03/18/21 - "Crossroads of Physical" (Not uploaded.)
+### v0.0.2.5.0 - 04/29/21
+- Defined 1 Layer
+- Increased Difficulty
+- Improvements
+- Bug Fixing
+
+### v0.0.2.3.0 - 03/18/21 - (Not uploaded.)
 - Increased Difficulty
 - Improvements and Ajustments
 
@@ -13,15 +19,15 @@
 ### v0.0.2.2.0 - 02/02/21
 - Bug Fixing
 
-### v0.0.2.1.0 - 02/01/21 - "Matters Fuse"
+### v0.0.2.1.0 - 02/01/21
 - Build Layer-Matters.
 - Improvements and Ajustments
 
-### v0.0.2.0.0 - 01/31/21 - "Elements Differentiation"
+### v0.0.2.0.0 - 01/31/21
 - Build Layer-Elements.
 - Improvements
 
-### v0.0.1.0.0 - 01/28/21 - "Energy Gush"
+### v0.0.1.0.0 - 01/28/21
 - Build Layer-Particles.
 - Improvements
 

@@ -1,6 +1,6 @@
 # The World Tree changelog:
 
-### v0.0.6.0 - 05/23/21 - (Not uploaded. V0.1 Test Version is NEAR.)
+### v0.0.6.0 - 05/23/21 - (Not uploaded. V0.1 Bug Test is NEAR.)
 - TMT Update
 - Rebuild Layer-ExoticElements
 - Improvements

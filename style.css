@@ -1,10 +1,12 @@
 * {
-	transition-duration: 0.5s;
+	transition-duration: 0.2s;
 	text-align: center;
 	font-family: "Inconsolata", monospace;
 	font-weight: bold;
 	table-align: center;
 	margin: auto;
+	-webkit-text-size-adjust: none;
+	text-size-adjust: none;
 }
 
 *:focus {
@@ -72,25 +74,38 @@ h1, h2, h3, b, input {
 	font-family: "Lucida Console", "Courier New", monospace;
 	color: rgba(0, 0, 0, 0.5);
 	text-shadow: var(--hqProperty3);
+	padding: 0;
+	margin: 0 10px 0 10px;
 }
+
+
+.treeButton {
+	height: 100px;
+	width: 100px;
+	border: var(--hqProperty1);
+	border-color: rgba(0, 0, 0, 0.125);
+	border-radius: 33%;
+	box-shadow: var(--hqProperty2a), var(--hqProperty2b);
+	font-size: 40px;
+	font-family: "Lucida Console", "Courier New", monospace;
+	color: rgba(0, 0, 0, 0.5);
+	text-shadow: var(--hqProperty3);
+	padding: 0;
+	margin: 0 10px 0 10px;
+}
+
 
 .smallNode {
 	height: 60px;
 	width: 60px;
-	border: var(--hqProperty1);
-	border-color: rgba(0, 0, 0, 0.125);
-	border-radius: 50%;
-	box-shadow: var(--hqProperty2a), var(--hqProperty2b);
 	font-size: 30px;
-	font-family: "Lucida Console", "Courier New", monospace;
-	color: rgba(0, 0, 0, 0.5);
-	text-shadow: var(--hqProperty3);
 }
 
 
 .locked {
-	background-color: #bf8f8f;
+	background-color: #252525;
 	cursor: not-allowed;
+	color : white
 }
 
 .can {
@@ -99,31 +114,35 @@ h1, h2, h3, b, input {
 
 .can:hover {
 	transform: scale(1.15, 1.15);
-	box-shadow: 0px 0px 20px var(--points)
+	box-shadow: 0 0 20px var(--points)
 }
 
-.treeNode.notify {
-	transform: scale(1.1, 1.1);
-	border-color: rgba(0, 0, 0, 0.125);
-	box-shadow: var(--hqProperty2a), 0px 0px 20px #ff0000;
-	z-index: 3
+
+.resetNotify {
+	box-shadow: var(--hqProperty2a), 0 0 8px #ffffff;
 }
 
 .treeNode.can:hover {
 	transform: scale(1.15, 1.15);
-	box-shadow: var(--hqProperty2a), 0px 0px 20px var(--points);
-	z-index: 4
+	box-shadow: var(--hqProperty2a), 0 0 20px var(--points);
+}
+
+.notify {
+	transform: scale(1.05, 1.05);
+	border-color: rgba(0, 0, 0, 0.125);
+	box-shadow: var(--hqProperty2a), 0 0 20px #ff0000;
 }
 
 .bought {
-	background-color: #77bf5f;
+	background-color: #252525;
 	cursor: default;
+	color : rgb(128, 128, 128)
 }
 
 .back {
 	position: absolute;
-	top: 0px;
-	left: 0px;
+	top: 0;
+	left: 0;
 	background-color: transparent;
 	border: 1px solid transparent;
 	color: var(--color);
@@ -131,9 +150,21 @@ h1, h2, h3, b, input {
 	cursor: pointer;
 }
 
+.other-back {
+	position: absolute;
+	top: 0;
+	left: 60px;
+	background-color: transparent;
+	border: 1px solid transparent;
+	color: var(--color);
+	font-size: 60px;
+	cursor: pointer;
+}
+
+
 .back:hover {
 	transform: scale(1.1, 1.1);
-	text-shadow: 0px 0px 7px var(--color);
+	text-shadow: 0 0 7px var(--color);
 }
 
 .barBase {
@@ -144,7 +175,7 @@ h1, h2, h3, b, input {
 
 .barBorder {
 	border: 2px solid;
-	border-radius: 10%;
+	border-radius: 10px;
 	border-color: var(--color);
 	overflow: hidden;
 	-webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
@@ -153,7 +184,7 @@ h1, h2, h3, b, input {
 
 .overlayTextContainer {
 	z-index: 3;
-	border-radius: 10%;
+	border-radius: 10px;
 	vertical-align: middle;
 	display: flex;
 	justify-content: center;
@@ -167,6 +198,8 @@ h1, h2, h3, b, input {
     position: absolute;
 	overflow: hidden;
 	margin-left: -0.5px;
+	transition-duration: 0.2s;
+
 }
 
 .overlayText {
@@ -178,17 +211,17 @@ h1, h2, h3, b, input {
 	color: var(--color);
 	font-size: 20px;
 	cursor: pointer;
-	padding: 5px 20px 5px 20px;
-	margin: 5px 5px 5px 5px;
-	border-radius: 25%;
+	padding: 5px 20px;
+	margin: 5px;
+	border-radius: 10px;
 	border: 2px solid;
-	border-color: rgba(0, 0, 0, 0.125);
+	color: var(--color);
 
 }
 
 .tabButton:hover {
 	transform: scale(1.1, 1.1);
-	text-shadow: 0px 0px 7px var(--color);
+	text-shadow: 0 0 7px var(--color);
 }
 
 .reset {
@@ -200,42 +233,60 @@ h1, h2, h3, b, input {
 }
 
 .upg {
-	height: 120px;
-	width: 120px;
-	border-radius: 25%;
+	min-height: 1px;
+	width: 150px;
+	border-radius: 5%;
 	border: 2px solid;
 	border-color: rgba(0, 0, 0, 0.125);
 	font-size: 10px;
+	overflow: visible;
 }
 
 .achievement {
 	height: 90px;
 	width: 90px;
-	border-radius: 25%;
+	border-radius: 5%;
 	border: 2px solid;
 	border-color: rgba(0, 0, 0, 0.125);
 	font-size: 10px;
 	color: white;
-	text-shadow: 0px 0px 2px #000000;
+	text-shadow: 0 0 2px #000000;
 }
 .achievement:hover {
-	box-shadow: 0px 0px 10px var(--points);
+	box-shadow: 0 0 10px var(--points);
 	z-index: 7;
 }
 
 .buyable {
 	height: 200px;
 	width: 200px;
-	border-radius: 25%;
+	border-radius: 5%;
 	border: 2px solid;
 	border-color: rgba(0, 0, 0, 0.125);
 	font-size: 10px;
+	position:relative;
+}
+
+.tile {
+	height: 80px;
+	width: 80px;
+	border-radius: 15%;
+	border: 2px solid;
+	border-color: rgba(0, 0, 0, 0.125);
+	font-size: 10px;
+	overflow: visible;
+}
+
+.tile.can:hover {
+	box-shadow: 0 0 10px var(--points);
+	transform: scale(1.1, 1.1);
+	z-index: 7;
 }
 
 .upgBig {
 	height: 200px;
 	width: 200px;
-	border-radius: 25%;
+	border-radius: 5%;
 	border: 2px solid;
 	border-color: rgba(0, 0, 0, 0.125);
 }
@@ -253,20 +304,20 @@ h1, h2, h3, b, input {
 .smallUpg {
 	height: 40px;
 	width: 40px;
-	border-radius: 25%;
+	border-radius: 5%;
 	border: 2px solid;
 	border-color: rgba(0, 0, 0, 0.125);
 }
 
 #points {
 	color: var(--points);
-	text-shadow: 0px 0px 10px var(--points);
+	text-shadow: 0 0 10px var(--points);
 }
 
 #optionWheel {
 	position: absolute;
-	top: 0px;
-	left: 0px;
+	top: 0;
+	left: 0;
 	height: 50px;
 	width: 50px;
 	cursor: pointer;
@@ -291,8 +342,8 @@ h1, h2, h3, b, input {
 
 #info:hover {
 	transform: scale(1.2, 1.2);
-	text-shadow: 5px 0px 10px #02f2f2,
-              -3px 0px 12px #02f2f2;
+	text-shadow: 5px 0 10px #02f2f2,
+              -3px 0 12px #02f2f2;
 }
 
 #discord {
@@ -327,7 +378,7 @@ h1, h2, h3, b, input {
 	top: 4px;
 	text-align: right;
 	color: var(--points);
-	text-shadow: 0px 0px 10px var(--points);
+	text-shadow: 0 0 10px var(--points);
 	cursor: pointer;
 }
 
@@ -346,7 +397,6 @@ a {
 	display: block;
 	font-size: 20px;
 	color: #41f5f5;
-	text-decoration-line: none;
 	cursor: pointer;
 	font-family: "Lucida Console", "Courier New", monospace;
 	-webkit-text-stroke-width: 1px;
@@ -356,17 +406,17 @@ a {
 
 .link:hover {
 	transform: scale(1.2, 1.2);
-	text-shadow: 5px 0px 10px #02f2f2,
-              -3px 0px 12px #02f2f2;
+	text-shadow: 5px 0 10px #02f2f2,
+              -3px 0 12px #02f2f2;
 }
 
 .opt {
 	height: 100px;
 	width: 100px;
-	border-radius: 25%;
+	border-radius: 5%;
 	border: 4px solid;
 	background-color: var(--color);
-	border-color: rgba(255, 255, 255, 0.125) rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.25) rgba(255, 255, 255, 0.125);
+	border-color: rgba(0, 0, 0, 0.125);
 	color: rgba(0, 0, 0, 0.5);
 	cursor: pointer;
 }
@@ -389,22 +439,29 @@ a {
 
 .milestone {
 	width: 100%;
+	min-width: 120px;
+	padding-left: 5px;
+	padding-right: 5px;
 	height: 75px;
-	background-color: #bf8f8f;
+	background-color: #252525;
 	border: 4px solid;
 	border-radius: 4px;
 	border-color: rgba(0, 0, 0, 0.125);
-	color: rgba(0, 0, 0, 0.5);
+	color: white;
 }
 
 .milestoneDone {
 	width: 100%;
+	min-width: 120px;
+	padding-left: 5px;
+	padding-right: 5px;
+
 	height: 75px;
-	background-color: #77bf5f;
+	background-color: #252525;
 	border: 4px solid;
 	border-radius: 4px;
 	border-color: rgba(0, 0, 0, 0.125);
-	color: rgba(0, 0, 0, 0.5);
+	color: rgb(133, 133 ,133);
 }
 
 .left {
@@ -478,6 +535,7 @@ ul {
 
 .hChallenge {
 	background-color: #bf8f8f;
+	position: relative;
 	border: 4px solid;
 	border-color: rgba(0, 0, 0, 0.125);
 	color: rgba(0, 0, 0, 0.5);
@@ -505,67 +563,61 @@ ul {
 	transition-duration: 0s
 }
 
-[tooltip] {
+.tooltipBox { 
 	position: relative;
-	z-index: 999999 !important
-}
+	display: inline-block;
+  }
+  
+  .tooltipBox:hover .tooltip{
+	opacity: 1;
+  }
 
-[tooltip]:before,
-[tooltip]:after {
-	visibility: hidden;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-	filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=0);
-	opacity: 0;
+  .forceTooltip .tooltip{
+	opacity: 1;
+  }
+  
+  .tooltip { 
 	pointer-events: none;
-	white-space: pre-wrap;
-}
-
-[tooltip]:before {
-	position: absolute;
+	text-align: center;
+	width: 150px;
+	font-size: 16px;
+	line-height: 1.2;
 	bottom: 100%;
 	left: 50%;
 	margin-bottom: 5px;
 	margin-left: -80px;
 	padding: 7px;
-	width: 160px;
+	font-family: "Lucida Console", "Courier New", monospace;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
+	opacity: 0;
+	transition: opacity 0.5s;
+  
+	position: absolute;
+	z-index: 99999999 !important;
+  
 	background-color: var(--background_tooltip);
 	color: var(--points);
 	content: attr(tooltip);
-	text-align: center;
-	font-size: 14px;
-	line-height: 1.2;
-	transition-duration: 0.5s;
-	white-space: pre-wrap;
-}
+	font-size:14px;
 
-[tooltip]:after {
+  }
+
+  .tooltip::after {
+	content: " ";
 	position: absolute;
 	bottom: 100%;
 	left: 50%;
+
+	top: 100%;
+	left: 50%;
 	margin-left: -5px;
-	width: 0;
-	border-top: 5px solid var(--background_tooltip);
-	border-right: 5px solid transparent;
-	border-left: 5px solid transparent;
-	content: " ";
-	font-size: 0;
-	line-height: 0;
-	transition-duration: 0.5s;
-	white-space: pre-wrap;
-}
-
-[tooltip]:hover:before,
-[tooltip]:hover:after {
-	visibility: visible;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-	filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=100);
-	opacity: 1;
-	white-space: pre-wrap;
-}
-
+	border-width: 5px;
+	border-style: solid;
+	border-color: var(--background_tooltip) transparent transparent transparent;
+  }
+  
 #loadingSection {
 	display: flex;
 	flex-direction: column;
@@ -573,17 +625,18 @@ ul {
 }
 
 .treeOverlay {
-	z-index: 200000;
-	pointer-events:none; 
+	pointer-events:none;
 	overflow:hidden;
 }
 
 .overlayThing {
+	z-index: 10000;
 	pointer-events:auto;
 	background-color: var(--background);
 }
 
 .sideLayers {
+	z-index: 10000;
 	pointer-events:auto;
 	position: absolute;
 	right: 55px;
@@ -596,4 +649,97 @@ button > * {
 
 .ghost {
 	visibility: hidden
+}
+
+.story {
+    width: 600px;
+    max-width: 95%;
+    border-bottom: solid 4px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.story-title {
+    text-align: left;
+    font-size: 24px;
+    color: black;
+    cursor: pointer;
+    border: none;
+    padding: 2px;
+    border-radius: 8px 8px 0 0;
+}
+
+.story-toggle {
+    border: none;
+    background: black;
+    color: white;
+    font-size: 20px;
+    pointer-events: none;
+    width: 1em;
+    display: inline-block;
+}
+
+.story-text {
+	padding: 2px;
+    border: solid 4px;
+    border-color: inherit;
+    border-radius: inherit;
+    border-top-left-radius: 0;
+    margin-bottom: -2px;
+}
+
+#treeTab td button {
+    margin: 0 10px;
+}
+
+.mark {
+	position: relative;
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	z-index: 10000;
+	margin-left: 0.9em;
+	margin-right: 0.9em;
+	margin-bottom: 1.2em;
+	border-right: 0.3em solid transparent;
+	border-bottom: 0.7em solid transparent;
+	border-left: 0.3em solid transparent;
+	font-size: 10px;
+	overflow:auto;
+	pointer-events: none;
+}
+
+.star {
+	position: relative;
+	display: inline-block;
+	width: 0;
+	height: 0;
+	z-index: 10000;
+	margin-left: 0.9em;
+	margin-right: 0.9em;
+	margin-bottom: 1.2em;
+	border-right: 0.3em solid transparent;
+	border-bottom: 0.7em solid #ffcc00;
+	border-left: 0.3em solid transparent;
+	font-size: 10px;
+	pointer-events: none;
+
+}
+
+.star:before, .star:after {
+	content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: .6em;
+    left: -1em;
+	border-right: 1em solid transparent;
+    border-bottom: 0.7em solid #ffcc00;
+    border-left: 1em solid transparent;
+	transform: rotate(-35deg);
+}
+
+.star:after {
+	transform: rotate(35deg);
 }

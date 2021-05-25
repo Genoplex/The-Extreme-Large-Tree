@@ -1,14 +1,7 @@
-# The-World-Tree
-Made by Genoplex.
+# The-Modding-Tree
 
-A modified version of The Prestige Tree which is still under constuction.
+An incremental game engine based on The Prestige Tree. It still requires programming knowledge, but it's mostly pretty easy things and copy/pasting.
 
-[Game Here](https://genoplex.github.io/The-World-Tree/)
-
-
-
-This is the tutorial of modding.
 [Look here for a tutorial on getting started with modding with TMT](docs/getting-started.md)
 
-Further tutorial.
-[documentation](docs/!general-info.md)
+You can look in the [documentation](docs/!general-info.md) for more information on how it all works, or look at the code in layers.js to see what it all looks like.
